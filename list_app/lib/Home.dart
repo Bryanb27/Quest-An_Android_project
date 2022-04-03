@@ -2,10 +2,35 @@ import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
   @override
-  _HomeState createState() => _HomeState();
+  _Home createState() => _Home();
 }
 
-class _HomeState extends State<Home> {
+class _Home extends State<Home> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Home"),
+      ),
+      body: Container(
+        child: Column(
+          children: <Widget>[
+            ElevatedButton(
+              child: Text("Ir para a roda da pergunta"),
+              onPressed: () {
+                Navigator.pushNamed(
+                  context,
+                  "/Roda_da_pergunta",
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 
  // List _itens = [];
 
@@ -18,7 +43,7 @@ class _HomeState extends State<Home> {
       _itens.add(item);
     }
   }*/
-  final titles = ["List 1", "List 2", "List 3"];
+  /*final titles = ["List 1", "List 2", "List 3"];
   final subtitles = [
     "Here is list 1 subtitle",
     "Here is list 2 subtitle",
@@ -101,6 +126,6 @@ class _HomeState extends State<Home> {
       ),
     );
   }*/
+*/
 
 
-}
