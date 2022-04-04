@@ -10,22 +10,117 @@ class _Home extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home"),
+        title: Text("Icone + Nome do jogador"),
       ),
       body: Container(
-        child: Column(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            ElevatedButton(
-              child: Text("Ir para a roda da pergunta"),
-              onPressed: () {
-                Navigator.pushNamed(
-                  context,
-                  "/Roda_da_pergunta",
-                );
-              },
+            Center(
+                child: Container(
+                  color: Colors.black12,
+                  width: 250,
+                  height: 250,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: SizedBox(
+                          width: 150,
+                          height: 80,
+                          child: ElevatedButton(
+                            child: Text("Procurar/Criar sala"),
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                context,
+                                "/Roda_da_pergunta",
+                              );
+                            },
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.red,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: SizedBox(
+                          width: 150,
+                          height: 80,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.red,
+                            ),
+                            child: Text("Jogo rápido"),
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                context,
+                                "/Roda_da_pergunta",
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
             ),
+            Center(
+                child: Container(
+                  color: Colors.black12,
+                  width: 250,
+                  height: 250,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: SizedBox(
+                          width: 150,
+                          height: 80,
+                          child: ElevatedButton(
+                            child: Text("Desempenho"),
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                context,
+                                "/Roda_da_pergunta",
+                              );
+                            },
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.green,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: SizedBox(
+                          width: 150,
+                          height: 80,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.blue,
+                            ),
+                            child: Text("Sair"),
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                context,
+                                "/Roda_da_pergunta",
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+            )
           ],
-        ),
+        )
       ),
     );
   }
