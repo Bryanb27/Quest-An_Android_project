@@ -1,50 +1,67 @@
 import 'package:flutter/material.dart';
+import 'package:counter/counter.dart';
 
-class Home extends StatefulWidget {
+class Lista extends StatefulWidget {
   @override
-  _HomeState createState() => _HomeState();
+  _ListaState createState() => _ListaState();
 }
 
-class _HomeState extends State<Home> {
+class _ListaState extends State<Lista> {
 
- // List _itens = [];
+  List _itens = [];
 
-  /*void _carregarItens(){
+  void _carregarItens() {
     _itens = [];
-    for(int i=0; i<=10; i++){
+    for (int i = 0; i <= 10; i++) {
       Map<String, dynamic> item = Map();
       item["titulo"] = "Titulo ${i} da lista";
-      item["icone"]= Image.asset("icone.png");
+      item["icone"] = Image.asset("icone.png");
       _itens.add(item);
     }
-  }*/
-  final titles = ["List 1", "List 2", "List 3"];
+  }
+
+  final titles = ["Jogador 1", "Jogador 2", "Jogador 3"];
   final subtitles = [
-    "Here is list 1 subtitle",
-    "Here is list 2 subtitle",
-    "Here is list 3 subtitle"
+    "Pontuação",
+    "Pontuação",
+    "Pontuação"
   ];
-  //final icons = [Icons.airplanemode_off, Icons.access_alarm, Icons.access_time];
+
+//final icons = [Icons.airplanemode_off, Icons.access_alarm, Icons.access_time];
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: titles.length,
-        itemBuilder: (context, index) {
-          return Card(
-              child: Center(
-                child: ListTile(
-                    title: Center(child: Text(titles[index])),
-                    subtitle: Center(child: Text(subtitles[index])),
-                    leading: CircleAvatar(
-                        backgroundImage: NetworkImage(
-                            "https://images.unsplash.com/photo-1547721064-da6cfb341d50")),
-                    //trailing: Icon(icons[index])),
-              )));
-        });
+    _carregarItens();
+    Future.delayed(const Duration(milliseconds: 5000), () {
+        Navigator.pushNamed(
+          context,
+          "/Roda",
+        );
+        // Here you can write your code for open new view
+      });
+
+    return Container(
+      child: ListView.builder(
+          itemCount: titles.length,
+          itemBuilder: (context, index) {
+            return Card(
+                child: Center(
+                    child: ListTile(
+                      title: Center(child: Text(titles[index])),
+                      subtitle: Center(child: Text(subtitles[index])),
+                      leading: CircleAvatar(
+                          backgroundImage: NetworkImage(
+                              "https://images.unsplash.com/photo-1547721064-da6cfb341d50")),
+                      //trailing: Icon(icons[index])),
+                    )));
+          }),
+    );
   }
-    //_carregarItens();
-  /*  return Scaffold(
+}
+
+
+ /*
+    return Scaffold(
       appBar: AppBar(
         title: Text("Lista"),
       ),
@@ -100,7 +117,9 @@ class _HomeState extends State<Home> {
         ),
       ),
     );
-  }*/
+  }
 
 
 }
+
+  */

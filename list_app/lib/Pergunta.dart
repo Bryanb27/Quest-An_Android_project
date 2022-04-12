@@ -43,7 +43,12 @@ class _Pergunta extends State<Pergunta> {
       ),
       ),
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                "/Lista",
+              ); //Adicionar pop up acerto
+            },
             child: Container(
               padding: EdgeInsets.all(15.0),
               margin: EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
@@ -62,7 +67,12 @@ class _Pergunta extends State<Pergunta> {
             ),
           ),
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                "/Lista",
+              );
+            },
             child: Container(
               padding: EdgeInsets.all(15.0),
               margin: EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
@@ -81,7 +91,12 @@ class _Pergunta extends State<Pergunta> {
             ),
           ),
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                "/Lista",
+              );
+            },
             child: Container(
               padding: EdgeInsets.all(15.0),
               margin: EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
@@ -100,7 +115,12 @@ class _Pergunta extends State<Pergunta> {
             ),
           ),
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                "/Lista",
+              );
+            },
             child: Container(
               padding: EdgeInsets.all(15.0),
               margin: EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),

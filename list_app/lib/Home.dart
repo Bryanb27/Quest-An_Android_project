@@ -8,9 +8,18 @@ class Home extends StatefulWidget {
   _Home createState() => _Home();
 }
 
+/*_dadosInit(){
+
+}*/
+
 class _Home extends State<Home> {
   @override
   Widget build(BuildContext context) {
+    int geografiaPercent = 32;
+    int historiaPercent = 30;
+    int portuguesPercent = 32;
+    int matematicaPercent = 30;
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Icone + Nome do jogador"),
@@ -39,7 +48,7 @@ class _Home extends State<Home> {
                             onPressed: () {
                               Navigator.pushNamed(
                                 context,
-                                "/Roda_da_pergunta",
+                                "/Lista",
                               );
                             },
                             style: ElevatedButton.styleFrom(
@@ -61,7 +70,7 @@ class _Home extends State<Home> {
                             onPressed: () {
                               Navigator.pushNamed(
                                 context,
-                                "/Roda_da_pergunta",
+                                "/Lista",
                               );
                             },
                           ),
@@ -79,7 +88,9 @@ class _Home extends State<Home> {
                         padding: EdgeInsets.all(2.0),
                         child: RoundedProgressBar(
                           //childLeft: Text("$percent%",
-                          childLeft: Text("30%",
+                            childCenter: Text("Geografia",
+                              style: TextStyle(color: Colors.white),),
+                          childLeft: Text("$geografiaPercent%",
                               style: TextStyle(color: Colors.white)),
                             percent: 37,
                           theme: RoundedProgressBarTheme.green),
@@ -88,7 +99,9 @@ class _Home extends State<Home> {
                         padding: EdgeInsets.all(2.0),
                         child: RoundedProgressBar(
                           //childLeft: Text("$percent%",
-                            childLeft: Text("30%",
+                            childCenter: Text("Historia",
+                              style: TextStyle(color: Colors.white),),
+                            childLeft: Text("$historiaPercent%",
                                 style: TextStyle(color: Colors.white)),
                             percent: 58,
                             theme: RoundedProgressBarTheme.blue),
@@ -97,22 +110,23 @@ class _Home extends State<Home> {
                         padding: EdgeInsets.all(2.0),
                         child: RoundedProgressBar(
                           //childLeft: Text("$percent%",
-                            childLeft: Text("30%",
+                            childCenter: Text("Português",
+                              style: TextStyle(color: Colors.white),),
+                            childLeft: Text("$portuguesPercent%",
                                 style: TextStyle(color: Colors.white)),
                             percent: 15,
                             theme: RoundedProgressBarTheme.purple),
                       ),
-                      Text("Matemática"),
                       Padding(
                         padding: EdgeInsets.all(2.0),
                         child: RoundedProgressBar(
                           //childLeft: Text("$percent%",
                             childCenter: Text("Matemática",
                                  style: TextStyle(color: Colors.white),),
-                            childLeft: Text("30%",
+                            childLeft: Text("$matematicaPercent%",
                                 style: TextStyle(color: Colors.white)),
                             percent: 87,
-                            theme: RoundedProgressBarTheme.yellow),
+                            theme: RoundedProgressBarTheme.midnight),
                       ),
                     ],
                   ),
