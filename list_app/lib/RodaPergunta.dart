@@ -10,21 +10,33 @@ class RodaPergunta extends StatefulWidget{
 
 class _RodaPergunta extends State<RodaPergunta> {
   StreamController<int> selected = StreamController<int>();
+  final items = <String>[
+    'Português',
+    'Matemática',
+    'Ciências',
+    'História',
+  ];
 
- /* @override
-  void dispose() {
-    selected.close();
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(milliseconds: 5000), () {
+      setState(() {
+        selected.add(
+          Fortune.randomInt(0, items.length),
+        );
+        Navigator.pushNamed(
+          context,
+          "/Pergunta",
+        );
+        // Here you can write your code for open new view
+      });
+    });
     //super.dispose();
-  }*/
+  }
 
   @override
   Widget build(BuildContext context) {
-    final items = <String>[
-      'Português',
-      'Matemática',
-      'Ciências',
-      'História',
-    ];
     String _tipoPergunta;
 
     return Scaffold(
@@ -33,17 +45,6 @@ class _RodaPergunta extends State<RodaPergunta> {
       ),
       body: Container(
         color: Colors.amber,
-        child: GestureDetector(
-          onTap: () {
-            setState(() {
-            selected.add(
-              Fortune.randomInt(0, items.length),
-            );
-            _tipoPergunta = selected.toString();
-            });
-            //sleep(Duration(seconds:1));
-
-          },
 
           child: Column(
             children: [
@@ -53,11 +54,12 @@ class _RodaPergunta extends State<RodaPergunta> {
                   items: [
                     for (var it in items) FortuneItem(child: Text(it)),
                   ],
+
                 ),
               ),
             ],
           ),
-        ),
+
       ),
 
     );

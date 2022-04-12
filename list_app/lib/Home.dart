@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rounded_progress_bar/flutter_rounded_progress_bar.dart';
+import 'package:flutter_rounded_progress_bar/rounded_progress_bar_style.dart';
+
 
 class Home extends StatefulWidget {
   @override
@@ -13,8 +16,8 @@ class _Home extends State<Home> {
         title: Text("Icone + Nome do jogador"),
       ),
       body: Container(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Center(
@@ -23,7 +26,7 @@ class _Home extends State<Home> {
                   width: 250,
                   height: 250,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Padding(
@@ -67,14 +70,57 @@ class _Home extends State<Home> {
                     ],
                   ),
                 )
-            ),
+            ), Text("Desempenho"),
             Center(
                 child: Container(
+                  child: Column(
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.all(2.0),
+                        child: RoundedProgressBar(
+                          //childLeft: Text("$percent%",
+                          childLeft: Text("30%",
+                              style: TextStyle(color: Colors.white)),
+                            percent: 37,
+                          theme: RoundedProgressBarTheme.green),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(2.0),
+                        child: RoundedProgressBar(
+                          //childLeft: Text("$percent%",
+                            childLeft: Text("30%",
+                                style: TextStyle(color: Colors.white)),
+                            percent: 58,
+                            theme: RoundedProgressBarTheme.blue),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(2.0),
+                        child: RoundedProgressBar(
+                          //childLeft: Text("$percent%",
+                            childLeft: Text("30%",
+                                style: TextStyle(color: Colors.white)),
+                            percent: 15,
+                            theme: RoundedProgressBarTheme.purple),
+                      ),
+                      Text("Matemática"),
+                      Padding(
+                        padding: EdgeInsets.all(2.0),
+                        child: RoundedProgressBar(
+                          //childLeft: Text("$percent%",
+                            childCenter: Text("Matemática",
+                                 style: TextStyle(color: Colors.white),),
+                            childLeft: Text("30%",
+                                style: TextStyle(color: Colors.white)),
+                            percent: 87,
+                            theme: RoundedProgressBarTheme.yellow),
+                      ),
+                    ],
+                  ),
                   color: Colors.black12,
-                  width: 250,
+                 /* width: 250,
                   height: 250,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Padding(
@@ -117,6 +163,8 @@ class _Home extends State<Home> {
                       ),
                     ],
                   ),
+                */
+
                 )
             )
           ],
