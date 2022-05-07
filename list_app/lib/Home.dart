@@ -1,24 +1,118 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rounded_progress_bar/flutter_rounded_progress_bar.dart';
-import 'package:flutter_rounded_progress_bar/rounded_progress_bar_style.dart';
-
+//import 'package:flutter_rounded_progress_bar/flutter_rounded_progress_bar.dart';
+//import 'package:flutter_rounded_progress_bar/rounded_progress_bar_style.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart';
 
 class Home extends StatefulWidget {
   @override
   _Home createState() => _Home();
 }
 
-/*_dadosInit(){
 
-}*/
 
 class _Home extends State<Home> {
+  _recuperarBancoDados( ) async {
+    final caminhoBancoDados = await getDatabasesPath();
+    final localBancoDados = join(caminhoBancoDados, "banco4.bd");
+    var bd = await openDatabase(
+        localBancoDados,
+        version: 2,
+        onCreate: (db, dbVersaoRecente){
+          String Usuario = "CREATE TABLE USUARIO("
+              "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+              "nome TEXT NOT NULL,"
+              "perguntas_certas TEXT,"
+              "perguntas_totais TEXT);";
+          String Materia = "CREATE TABLE MATERIA("
+              "idmateria INTEGER PRIMARY KEY AUTOINCREMENT,"
+              "nome_materia TEXT);";
+          String Pergunta = "CREATE TABLE PERGUNTA ("
+              "idpergunta INTEGER PRIMARY KEY AUTOINCREMENT,"
+              "enunciado TEXT,"
+              "fk_idmateria INTEGER NOT NULL,"
+              "FOREIGN KEY (fk_idmateria) REFERENCES MATERIA(idmateria),"
+              "alterativas_erradas TEXT,"
+              "alternativa_correta TEXT);";
+      //    db.execute(Usuario);
+
+
+          db.execute(Materia);
+          db.execute(Pergunta);
+          db.execute(Usuario);
+          Map<String, dynamic> dadosMateria = {
+            "nome_materia" : "Literatura",
+          };
+          db.insert("MATERIA", dadosMateria);
+          dadosMateria = {
+            "nome_materia" : "Historia",
+          };
+          db.insert("MATERIA", dadosMateria);
+          dadosMateria = {
+            "nome_materia" : "Ciencia",
+          };
+          db.insert("MATERIA", dadosMateria);
+          dadosMateria = {
+            "nome_materia" : "Geografia",
+          };
+          db.insert("MATERIA", dadosMateria);
+     //     db.execute(Pergunta);
+        }
+    );
+    print("aberto: " + bd.isOpen.toString() );
+    return bd;
+  }
+  _InserirMateria( ) async{
+    Database bd = await _recuperarBancoDados();
+
+    Map<String, dynamic> dadosMateria = {
+      "enunciado" : "Quantas luas tem em jupiter",
+      "fk_idmateria" : 3,
+      "alternativas_erradas" : "1,2,3",
+      "alternativa_correta" : "4"
+
+    };
+    bd.insert("PERGUNTA", dadosMateria);
+    //teste
+    String sql = "SELECT * FROM PERGUNTA";
+    List material = await bd.rawQuery(sql);
+    for(var usu in material){
+      print(" id: "+usu['idpergunta'].toString() +
+          " enunciado: "+usu['enunciado'] +
+          " idmateria: "+usu['fk_idmateria'].toString() +
+          " wrong: "+usu['alternativas_erradas']+
+          " right: "+usu['alternativa_correta']);
+    }
+  }
+
+
+  /*_listarUsuarios() async{
+    Database bd = await _recuperarBancoDados();
+    String sql = "SELECT * FROM MATERIA";
+    Map<String, dynamic> dadosMateria = {
+      "idmateria" : 1,
+      "nome_materia" : "Matematica",
+    };
+    int id = await bd.insert("MATERIA", dadosMateria);
+
+    List material = await bd.rawQuery(sql);
+    for(var usu in material){
+      print(" id: "+usu['idmateria'].toString() +
+          " nome: "+usu['nome_materia']);
+      }
+      }*/
+
   @override
   Widget build(BuildContext context) {
+
+    //Database db = _recuperarBancoDados();
+
     int geografiaPercent = 32;
     int historiaPercent = 30;
-    int portuguesPercent = 32;
-    int matematicaPercent = 30;
+    int literaturaPercent = 32;
+    int cienciasPercent = 30;
+
+    //_InserirMateria("")
 
     return Scaffold(
       appBar: AppBar(
@@ -38,6 +132,12 @@ class _Home extends State<Home> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
+                      ElevatedButton(
+                          child: Text("Teste"),
+                          onPressed: (){
+                            _InserirMateria();
+                          }
+                      ),
                       Padding(
                         padding: EdgeInsets.all(8.0),
                         child: SizedBox(
@@ -80,14 +180,13 @@ class _Home extends State<Home> {
                   ),
                 )
             ), Text("Desempenho"),
-            Center(
+            /* Center(   //comment tava aqui
                 child: Container(
                   child: Column(
                     children: <Widget>[
                       Padding(
                         padding: EdgeInsets.all(2.0),
                         child: RoundedProgressBar(
-                          //childLeft: Text("$percent%",
                             childCenter: Text("Geografia",
                               style: TextStyle(color: Colors.white),),
                           childLeft: Text("$geografiaPercent%",
@@ -98,7 +197,6 @@ class _Home extends State<Home> {
                       Padding(
                         padding: EdgeInsets.all(2.0),
                         child: RoundedProgressBar(
-                          //childLeft: Text("$percent%",
                             childCenter: Text("Historia",
                               style: TextStyle(color: Colors.white),),
                             childLeft: Text("$historiaPercent%",
@@ -109,10 +207,9 @@ class _Home extends State<Home> {
                       Padding(
                         padding: EdgeInsets.all(2.0),
                         child: RoundedProgressBar(
-                          //childLeft: Text("$percent%",
-                            childCenter: Text("Português",
+                            childCenter: Text("Literatura",
                               style: TextStyle(color: Colors.white),),
-                            childLeft: Text("$portuguesPercent%",
+                            childLeft: Text("$literaturaPercent%",
                                 style: TextStyle(color: Colors.white)),
                             percent: 15,
                             theme: RoundedProgressBarTheme.purple),
@@ -120,10 +217,9 @@ class _Home extends State<Home> {
                       Padding(
                         padding: EdgeInsets.all(2.0),
                         child: RoundedProgressBar(
-                          //childLeft: Text("$percent%",
-                            childCenter: Text("Matemática",
+                            childCenter: Text("Ciências",
                                  style: TextStyle(color: Colors.white),),
-                            childLeft: Text("$matematicaPercent%",
+                            childLeft: Text("$cienciasPercent%",
                                 style: TextStyle(color: Colors.white)),
                             percent: 87,
                             theme: RoundedProgressBarTheme.midnight),
@@ -131,56 +227,8 @@ class _Home extends State<Home> {
                     ],
                   ),
                   color: Colors.black12,
-                 /* width: 250,
-                  height: 250,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: SizedBox(
-                          width: 150,
-                          height: 80,
-                          child: ElevatedButton(
-                            child: Text("Desempenho"),
-                            onPressed: () {
-                              Navigator.pushNamed(
-                                context,
-                                "/Roda_da_pergunta",
-                              );
-                            },
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.green,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: SizedBox(
-                          width: 150,
-                          height: 80,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.blue,
-                            ),
-                            child: Text("Sair"),
-                            onPressed: () {
-                              Navigator.pushNamed(
-                                context,
-                                "/Roda_da_pergunta",
-                              );
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                */
-
                 )
-            )
+            )*/ //O outro comentt
           ],
         )
       ),
@@ -284,5 +332,4 @@ class _Home extends State<Home> {
     );
   }*/
 */
-
 
